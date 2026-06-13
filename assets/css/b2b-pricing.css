@@ -1,0 +1,79 @@
+.hdm-b2b-box {
+
+    border:1px solid #d9d9d9;
+    padding:20px;
+    margin:20px 0;
+    background:#fafafa;
+
+}
+
+.hdm-b2b-title {
+
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:16px;
+
+}
+
+.hdm-b2b-main-price {
+
+    margin-bottom:12px;
+
+}
+
+.hdm-b2b-label {
+
+    font-size:13px;
+    color:#666;
+
+}
+
+.hdm-b2b-price {
+
+    font-size:30px;
+    font-weight:700;
+    color:#111;
+
+}
+
+.hdm-b2b-retail {
+
+    color:#666;
+    margin-bottom:18px;
+
+}
+
+.hdm-b2b-tier-title {
+
+    font-weight:700;
+    margin-bottom:10px;
+
+}
+
+.hdm-b2b-tier-table table {
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+.hdm-b2b-tier-table td {
+
+    padding:8px 0;
+    border-bottom:1px solid #ececec;
+
+}
+
+/* Force order notes visible */
+
+.wc-block-checkout__add-note {
+
+    display:block !important;
+
+}
+
+.wc-block-checkout__add-note button {
+
+    display:none !important;
+
+}
