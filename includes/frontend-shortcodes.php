@@ -142,6 +142,7 @@ add_shortcode('hdm_debug_user_role', function () {
     echo '<strong>Logged in:</strong> ' . (is_user_logged_in() ? 'YES' : 'NO') . '<br>';
     echo '<strong>User ID:</strong> ' . esc_html($user->ID) . '<br>';
     echo '<strong>Roles:</strong> ' . esc_html(implode(', ', (array) $user->roles)) . '<br>';
+    echo '<strong>Reseller tier:</strong> ' . esc_html(hdm_get_reseller_tier($user->ID)) . '<br>';
     echo '<strong>Payment terms:</strong> ' . esc_html(get_user_meta($user->ID, 'hdm_payment_terms', true));
     echo '</div>';
 
