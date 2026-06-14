@@ -104,31 +104,6 @@ add_shortcode('hdm_b2b_price_box', function () {
 });
 
 /**
- * Hide standard WooCommerce price for B2B users
- *
- * Purpose:
- * Prevent duplicate pricing display when the custom
- * B2B pricing box is shown.
- */
-
-add_filter(
-    'woocommerce_get_price_html',
-    'hdm_hide_standard_price_for_b2b',
-    20,
-    2
-);
-
-/* function hdm_hide_standard_price_for_b2b($price, $product) {
-
-    if (!hdm_is_b2b_customer()) {
-        return $price;
-    }
-
-    return '';
-} */
-
-
-/**
  * Shortcode: [hdm_debug_user_role]
  */
 add_shortcode('hdm_debug_user_role', function () {
@@ -148,3 +123,17 @@ add_shortcode('hdm_debug_user_role', function () {
 
     return ob_get_clean();
 });
+
+/**
+ * Show debug box on single product page for admins only.
+ */
+add_action('woocommerce_single_product_summary', 'hdm_show_debug_shortcode_on_product_page', 99);
+
+function hdm_show_debug_shortcode_on_product_page() {
+
+    if (!current_user_can('manage_options') && !hdm_is_b2b_customer()) {
+        return;
+    }
+
+    echo do_shortcode('[hdm_debug_user_role]');
+}
