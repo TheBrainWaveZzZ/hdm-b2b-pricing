@@ -2,7 +2,7 @@
 /**
  * Plugin Name: HDM B2B Pricing Prototype
  * Description: Scope 1/2 - Custom B2B pricing prototype for WooCommerce.
- * Version: 0.2
+ * Version: 0.2.1
  * Author: HDM
  */
 
