@@ -66,3 +66,29 @@ function hdm_get_b2b_price($product_id, $qty = 1) {
 
     return $net_price * (1 - ($discount / 100));
 }
+
+function hdm_get_tier_price($product_id, $tier) {
+
+    $meta_map = [
+        'silver'   => '_hdm_b2b_price_silver',
+        'gold'     => '_hdm_b2b_price_gold',
+        'platinum' => '_hdm_b2b_price_platinum',
+        'vip'      => '_hdm_b2b_price_vip',
+    ];
+
+    if (!isset($meta_map[$tier])) {
+        return false;
+    }
+
+    $price = get_post_meta(
+        $product_id,
+        $meta_map[$tier],
+        true
+    );
+
+    if ($price === '' || $price === null) {
+        return false;
+    }
+
+    return (float) $price;
+}
