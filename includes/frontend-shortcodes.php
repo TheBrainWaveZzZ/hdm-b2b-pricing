@@ -138,6 +138,10 @@ add_shortcode('hdm_debug_user_role', function () {
         }
     }
 
+    $b2b_price = hdm_get_b2b_price($product_id, 1);
+
+echo '<strong>Pricing Engine Result:</strong> ' . wc_price($b2b_price) . '<br>';
+
     echo '</div>';
 
     return ob_get_clean();
