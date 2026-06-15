@@ -117,6 +117,7 @@ add_shortcode('hdm_debug_user_role', function () {
     echo '<strong>Logged in:</strong> ' . (is_user_logged_in() ? 'YES' : 'NO') . '<br>';
     echo '<strong>User ID:</strong> ' . esc_html($user->ID) . '<br>';
     echo '<strong>Roles:</strong> ' . esc_html(implode(', ', (array) $user->roles)) . '<br>';
+    echo '<strong>Pricing mode:</strong> ' . esc_html(hdm_b2b_get_pricing_mode()) . '<br>';
 
     $tier = hdm_get_reseller_tier($user->ID);
 

@@ -35,6 +35,7 @@ register_activation_hook(__FILE__, function () {
  */
 require_once HDM_B2B_PLUGIN_PATH . 'includes/roles.php';
 require_once HDM_B2B_PLUGIN_PATH . 'includes/reseller-tier.php';
+require_once HDM_B2B_PLUGIN_PATH . 'includes/admin-settings.php';
 require_once HDM_B2B_PLUGIN_PATH . 'includes/assets.php';
 require_once HDM_B2B_PLUGIN_PATH . 'includes/product-fields.php';
 require_once HDM_B2B_PLUGIN_PATH . 'includes/pricing-engine.php';
