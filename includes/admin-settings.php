@@ -65,6 +65,13 @@ function hdm_b2b_get_settings() {
             ],
         ],
         [
+    'title'   => 'Debug mode',
+    'desc'    => 'Show B2B debug information to administrators only.',
+    'id'      => 'hdm_b2b_debug_mode',
+    'type'    => 'checkbox',
+    'default' => 'no',
+],
+        [
             'type' => 'sectionend',
             'id'   => 'hdm_b2b_settings_end',
         ],
@@ -88,4 +95,9 @@ function hdm_b2b_get_pricing_mode() {
     }
 
     return $mode;
+}
+
+function hdm_b2b_debug_mode_enabled() {
+
+    return get_option('hdm_b2b_debug_mode', 'no') === 'yes';
 }

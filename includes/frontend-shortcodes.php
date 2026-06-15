@@ -185,9 +185,13 @@ add_action(
 
 function hdm_show_debug_shortcode_on_product_page() {
 
-    if (!current_user_can('manage_options') && !hdm_is_b2b_customer()) {
+    if (!hdm_b2b_debug_mode_enabled()) {
         return;
     }
+
+    if (!current_user_can('manage_options') && !hdm_is_b2b_customer()) {
+    return;
+}
 
     echo do_shortcode('[hdm_debug_user_role]');
 }
