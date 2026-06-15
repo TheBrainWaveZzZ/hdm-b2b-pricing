@@ -14,6 +14,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+
+
 /**
  * Show B2B price box
  */
@@ -44,15 +46,14 @@ function hdm_show_b2b_price_box() {
     $tier2_discount = (float) get_post_meta($product_id, '_hdm_b2b_tier2_discount', true);
 
     echo '<div class="hdm-b2b-box">';
-    echo '<div class="hdm-b2b-title">B2B Pricing</div>';
 
     echo '<div class="hdm-b2b-main-price">';
-    echo '<div class="hdm-b2b-label">Your B2B price</div>';
+    echo '<div class="hdm-b2b-label">Your price</div>';
     echo '<div class="hdm-b2b-price">' . wc_price($b2b_price) . '</div>';
     echo '</div>';
 
     if ($retail_price) {
-        echo '<div class="hdm-b2b-retail">Retail price: ' . wc_price($retail_price) . '</div>';
+        echo '<div class="hdm-b2b-retail">Recommended Retail Price: ' . wc_price($retail_price) . '</div>';
     }
 
    if ($tier1_qty || $tier2_qty) {
@@ -87,6 +88,12 @@ function hdm_show_b2b_price_box() {
         echo '<td>' . wc_price(hdm_get_b2b_price($product_id, $tier2_qty)) . '</td>';
         echo '</tr>';
     }
+
+    $b2b_price = hdm_get_b2b_price($product_id, 1);
+
+echo '<strong>Pricing Engine Result:</strong> '
+    . ($b2b_price !== false ? wc_price($b2b_price) : 'NO B2B PRICE')
+    . '<br>';
 
     echo '</tbody>';
     echo '</table>';
@@ -148,9 +155,33 @@ echo '<strong>Pricing Engine Result:</strong> ' . wc_price($b2b_price) . '<br>';
 });
 
 /**
+ * Auto show B2B price box on normal WooCommerce product pages.
+ * Useful for testing without Elementor.
+ */
+
+add_action(
+    'woocommerce_after_single_product_summary',
+    'hdm_auto_show_b2b_price_box',
+    5
+);
+
+function hdm_auto_show_b2b_price_box() {
+
+    if (!hdm_is_b2b_customer()) {
+        return;
+    }
+
+    echo do_shortcode('[hdm_b2b_price_box]');
+}
+
+/**
  * Show debug box on single product page for admins only.
  */
-add_action('woocommerce_single_product_summary', 'hdm_show_debug_shortcode_on_product_page', 99);
+add_action(
+    'woocommerce_after_single_product_summary',
+    'hdm_show_debug_shortcode_on_product_page',
+    6
+);
 
 function hdm_show_debug_shortcode_on_product_page() {
 

@@ -19,16 +19,61 @@ if (!defined('ABSPATH')) {
 
 function hdm_get_b2b_price($product_id, $qty = 1) {
 
-    $net_price = (float) get_post_meta(
-        $product_id,
-        '_hdm_b2b_net_price',
-        true
-    );
+    $product = wc_get_product($product_id);
+
+    if (!$product) {
+        return false;
+    }
+
+    $pricing_mode = hdm_b2b_get_pricing_mode();
+
+    /**
+     * Tiered mode
+     * Uses reseller tier price.
+     * If no tier price exists, fallback to normal WooCommerce price.
+     */
+    if ($pricing_mode === 'tiered') {
+
+        $tier = hdm_get_reseller_tier();
+
+        if ($tier) {
+
+            $tier_price = hdm_get_tier_price($product_id, $tier);
+
+            if ($tier_price !== false) {
+                $net_price = $tier_price;
+            } else {
+                $net_price = (float) $product->get_regular_price();
+            }
+
+        } else {
+            $net_price = (float) $product->get_regular_price();
+        }
+
+    /**
+     * Legacy mode
+     * Uses old B2B net price.
+     */
+    } else {
+
+        $net_price = (float) get_post_meta(
+            $product_id,
+            '_hdm_b2b_net_price',
+            true
+        );
+
+        if (!$net_price) {
+            return false;
+        }
+    }
 
     if (!$net_price) {
         return false;
     }
 
+    /**
+     * Existing quantity discount logic.
+     */
     $tier1_qty = (int) get_post_meta(
         $product_id,
         '_hdm_b2b_tier1_qty',
