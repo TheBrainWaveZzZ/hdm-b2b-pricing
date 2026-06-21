@@ -42,3 +42,4 @@ require_once HDM_B2B_PLUGIN_PATH . 'includes/pricing-engine.php';
 require_once HDM_B2B_PLUGIN_PATH . 'includes/frontend-shortcodes.php';
 require_once HDM_B2B_PLUGIN_PATH . 'includes/cart-pricing.php';
 require_once HDM_B2B_PLUGIN_PATH . 'includes/payment-terms.php';
+require_once HDM_B2B_PLUGIN_PATH . 'includes/frontend/class-hdmb2b-price-display.php';
